@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三角洲行动 · 烽火地带改枪码库</title>
+<style>
+  :root{
+    --bg:#f4f5f7;
+    --card:#ffffff;
+    --text:#1f2430;
+    --sub:#6b7280;
+    --primary:#e8862c;
+    --primary-soft:#fdf0e3;
+    --border:#e7e9ee;
+    --code-bg:#f7f8fa;
+    --shadow:0 1px 2px rgba(20,24,35,.05),0 4px 16px rgba(20,24,35,.06);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* 头部 */
+  header{padding:40px 0 8px}
+  .badge{
+    display:inline-block;font-size:12px;letter-spacing:1px;color:var(--primary);
+    background:var(--primary-soft);padding:4px 10px;border-radius:20px;font-weight:600;
+  }
+  h1{font-size:28px;margin:12px 0 4px;font-weight:700}
+  .subtitle{color:var(--sub);font-size:14px}
+  .howto{
+    margin-top:14px;font-size:13px;color:var(--sub);
+    background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;
+  }
+  .howto b{color:var(--text)}
+
+  /* 搜索 + 筛选 */
+  .toolbar{position:sticky;top:0;z-index:10;background:var(--bg);padding:16px 0;margin-top:8px}
+  .search{
+    display:flex;align-items:center;gap:10px;background:var(--card);
+    border:1px solid var(--border);border-radius:12px;padding:12px 16px;
+    box-shadow:var(--shadow);transition:border-color .15s;
+  }
+  .search:focus-within{border-color:var(--primary)}
+  .search svg{flex:none;color:var(--sub)}
+  .search input{
+    flex:1;border:none;outline:none;font-size:15px;background:transparent;color:var(--text);
+  }
+  .search .count{flex:none;font-size:12px;color:var(--sub)}
+  .cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{
+    border:1px solid var(--border);background:var(--card);color:var(--sub);
+    padding:7px 14px;border-radius:20px;font-size:13px;cursor:pointer;
+    transition:all .15s;user-select:none;white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--primary);color:var(--primary)}
+  .chip.active{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:600}
+
+  /* 卡片列表 */
+  .list{display:grid;grid-template-columns:1fr;gap:14px;padding:8px 0 40px}
+  @media(min-width:720px){.list{grid-template-columns:1fr 1fr}}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;
+    transition:transform .12s,box-shadow .12s;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(20,24,35,.1)}
+  .card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{
+    font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px;letter-spacing:.5px;
+    color:#fff;
+  }
+  .tag.rifle{background:#e8862c}
+  .tag.smg{background:#3b82f6}
+  .tag.sniper{background:#8b5cf6}
+  .tag.lmg{background:#10b981}
+  .tag.pistol{background:#14b8a6}
+  .tag.shotgun{background:#ef4444}
+  .price{margin-left:auto;font-size:13px;color:var(--primary);font-weight:600}
+  .price.empty{color:#c0c4cc;font-weight:400}
+  h2.name{font-size:18px;font-weight:700;line-height:1.3}
+  h2.name .title{font-weight:500;color:var(--sub);font-size:14px;margin-left:8px}
+  .desc{font-size:13.5px;color:#454c59}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tags span{font-size:12px;color:#5b6472;background:#f2f4f7;border-radius:6px;padding:2px 8px}
+  .code-row{display:flex;align-items:center;gap:8px;margin-top:auto}
+  .code{
+    flex:1;font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    font-size:13px;color:#8a3c00;background:var(--code-bg);border:1px dashed #e5d5c4;
+    border-radius:8px;padding:9px 12px;word-break:break-all;letter-spacing:.2px;
+  }
+  .copy{
+    flex:none;border:1px solid var(--primary);background:var(--primary);color:#fff;
+    padding:9px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:600;
+    transition:opacity .15s;white-space:nowrap;
+  }
+  .copy:hover{opacity:.88}
+  .copy.copied{background:#16a34a;border-color:#16a34a}
+
+  .empty{text-align:center;color:var(--sub);padding:60px 0;font-size:14px}
+
+  footer{padding:24px 0 48px;color:var(--sub);font-size:12.5px;border-top:1px solid var(--border)}
+  footer a{color:var(--primary);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:#1f2430;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;
+    opacity:0;pointer-events:none;transition:all .2s;z-index:99;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">DELTA FORCE · 烽火地带</span>
+    <h1>改枪码库</h1>
+    <p class="subtitle">烽火地带模式枪械改装方案合集 · 点击「复制」即可导入游戏</p>
+    <div class="howto">
+      使用方法：进入游戏 → <b>战术改装 → 方案 → 粘贴改枪码 → 保存</b>。
+      改枪码会随赛季版本变动，抄码后建议先到靶场试手感、核对配件价格；模式前缀（烽火地带 / 全面战场）不可混用。
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="q" type="text" placeholder="搜索枪名、改枪码或关键词，如 M4A1 / 腰射 / 6J3O..." autocomplete="off">
+      <span class="count" id="count"></span>
+    </div>
+    <div class="cats" id="cats"></div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <footer>
+    <p>数据整理自网络公开攻略与玩家分享（NGA、17173、九游、游侠、B站、TapTap 等），约 65 套烽火地带改枪码，仅供参考。</p>
+    <p>部分方案未标注价格或仅标注赛季信息，请以游戏内实际为准。</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = [
+  // ===== 突击步枪 =====
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"20万", code:"6J3O8MS0DVV2IQEKG70I3", title:"20万极致改装", desc:"猛攻/以小博大首选，45米稳定压枪，二十万价位性价比拉满。", tags:["45米压枪","高性价比"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"60万", code:"6I57UD4080ELE0AQVMCG8", title:"满改消音", desc:"S7满改消音方案，有效射程拉到59米，远程压制与中距输出兼备。", tags:["59米射程","消音"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"25万", code:"6J35I8C0BNSV43TFRAQ1K", title:"平价双托流", desc:"双托结构稳定，二倍镜50米稳压，约25万高性价比。", tags:["50米稳压","双托"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"40万", code:"6KE0FDG0B9LVG8E9IO5G7", title:"超绝满配大弹夹", desc:"机密天王同款满配，大弹夹续航强，适合持续交火。", tags:["大弹夹","续航"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"23万", code:"6L8JT0806BI6KALR8Q07D", title:"S11纯绿丐版", desc:"纯绿色件丐版，据枪61/后坐61，射程47米，23万低成本起手。", tags:["据枪61","后坐61","47米"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"24万", code:"6LE9LI80DVV2IQEKG70I3", title:"24万稳定压枪", desc:"加百列长枪管方案，50米稳定压枪，中距对枪扎实。", tags:["50米压枪","加百列长枪管"]},
+  {name:"M4A1", type:"突击步枪", cat:"rifle", price:"30万", code:"6JG9T2C0C4PRBT1BGUG84", title:"30万通用", desc:"40米有效距离的均衡改装，通用性强，适合多数对局。", tags:["40米","均衡"]},
+  {name:"K437", type:"突击步枪", cat:"rifle", price:"半改", code:"6LDIDQC0DVV2IQEKG70I3", title:"半改后坐力控制", desc:"钢制膛口制退器+断刃短枪管组合，控制成本的同时最大化后坐力控制，适合中近交战。", tags:["后坐力控制","中近交战"]},
+  {name:"K437", type:"突击步枪", cat:"rifle", price:"", code:"6L73SSK0A5GUHBBBKSMNC", title:"稳定爆头配装", desc:"NGA玩家自用，稳定输出思路，适合打头。", tags:["稳定爆头"]},
+  {name:"K416", type:"突击步枪", cat:"rifle", price:"30万", code:"6JV0ERG0302MRACG8OCDN", title:"30万超低配", desc:"30万超低配无后坐力方案，性价比极高。", tags:["无后坐力","超低配"]},
+  {name:"K416", type:"突击步枪", cat:"rifle", price:"34万", code:"6GPACP800PVL17K76AL74", title:"34万性价比", desc:"34万高性价比方案，适合搭配干员无名使用。", tags:["性价比","干员无名"]},
+  {name:"MCX LT", type:"突击步枪", cat:"rifle", price:"30万", code:"6J0DPQ0092SAL51E9I4V4", title:"猎手枪管版", desc:"金枪客任务好伙伴，高伤害高爆发，约30万高性价比。", tags:["高伤害","金枪客"]},
+  {name:"MCX LT", type:"突击步枪", cat:"rifle", price:"", code:"6J0DQ0S092SAL51E9I4V4", title:"焰魂枪管版", desc:"近战爆发型，适合猛攻打法。", tags:["近战爆发"]},
+  {name:"AKM", type:"突击步枪", cat:"rifle", price:"35万", code:"6JHK228035VPG7LB68O67", title:"35万稳定输出", desc:"47米有效距离，7.62口径稳定输出，中距强势。", tags:["47米","7.62"]},
+
+  // ===== 冲锋枪 =====
+  {name:"Vector", type:"冲锋枪", cat:"smg", price:"24万", code:"6JH1A7K0C4PRBT1BGUG84", title:"24万修脚", desc:"21米近距离修脚流，低成本高爆发。", tags:["21米","修脚"]},
+  {name:"Vector", type:"冲锋枪", cat:"smg", price:"52万", code:"6JG9VBO0C4PRBT1BGUG84", title:"52万满改", desc:"30米满改，射速与爆发拉满。", tags:["30米","满改"]},
+  {name:"MP7", type:"冲锋枪", cat:"smg", price:"33万", code:"6JGK53G0C4PRBT1BGUG84", title:"33万半改", desc:"26米半改方案，性价比之选。", tags:["26米","半改"]},
+  {name:"MP7", type:"冲锋枪", cat:"smg", price:"50万", code:"6JGK4NS0C4PRBT1BGUG84", title:"50万满改", desc:"32米满改，控枪与射速兼备。", tags:["32米","满改"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"38万", code:"6J6DB0806SHEK0B7F8VA2", title:"连发版", desc:"全自动连发改法，约38万，近距离泼水。", tags:["全自动","连发"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"37万", code:"6J6DAV006SHEK0B7F8VA2", title:"单点双修版", desc:"单点/双修兼顾，约37万。", tags:["双修"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"40万", code:"6LAC2RS0ARR574ULRP1HM", title:"40万全自动", desc:"全自动性价比方案，五级弹也能打。", tags:["全自动","性价比"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"40万", code:"6LJ6KEC0FGVLC6GF0KF6A", title:"40万相位腰射", desc:"相位+绿棍子，腰射值86，贴脸爆发强。", tags:["腰射86","相位"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"53万", code:"6LAC3AG0ARR574ULRP1HM", title:"53万双修", desc:"双修全自动，腰射100，上限拉满。", tags:["腰射100","双修"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"40万", code:"6LAC3UK0ARR574ULRP1HM", title:"40万三连发", desc:"三连发高爆发，尖头弹两枪耐久头。", tags:["三连发","高爆发"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"41万", code:"6L8B0NK03T4LD7TDTK1AI", title:"41万沙暴三双修", desc:"沙暴共三双修流，兼顾两种输出模式。", tags:["双修"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"", code:"6I5E80008R4RKTJI3FOBI", title:"昊天推荐(S8)", desc:"S8赛季主播昊天推荐方案。", tags:["S8","主播推荐"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"28万", code:"6I5M0HS04QRQQL6OOBF6G", title:"半改丐版", desc:"28万以内半改丐版，低成本体验全自动。", tags:["半改","丐版"]},
+  {name:"MK4", type:"冲锋枪", cat:"smg", price:"", code:"6L73KE00A5GUHBBBKSMNC", title:"NGA S11自用", desc:"NGA玩家S11赛季自用方案。", tags:["S11"]},
+
+  // ===== 狙击/射手步枪 =====
+  {name:"SVD", type:"狙击/射手步枪", cat:"sniper", price:"28万", code:"6IVDVP405MEBDRSRO17QC", title:"28万狙击精英", desc:"S8狙击精英任务推荐，28万实用方案。", tags:["狙击精英","28万"]},
+  {name:"SVD", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6IVGV1805MUARGMS2VI79", title:"闪电SVD", desc:"快节奏连狙思路，闪电清人。", tags:["连狙"]},
+  {name:"SVD", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6FBGSBS0CONGNP2MQHBSH", title:"丐版(S4)", desc:"S4赛季丐版，低成本起手。", tags:["丐版"]},
+  {name:"M700", type:"狙击/射手步枪", cat:"sniper", price:"30万", code:"6IVE2AC05MEBDRSRO17QC", title:"30万狙击精英", desc:"S8狙击精英任务推荐，30万。", tags:["狙击精英","30万"]},
+  {name:"M700", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6IVI9U805MUARGMS2VI79", title:"超性价比", desc:"超高性价比栓狙方案。", tags:["性价比"]},
+  {name:"M700", type:"狙击/射手步枪", cat:"sniper", price:"60万", code:"6FG5OGC051CKRTT084FIR", title:"60万主播林树", desc:"主播林树自用高端方案，60万。", tags:["60万","主播自用"]},
+  {name:"M700", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6G82G0S0CONGNP2MQHBSH", title:"3/7倍镜", desc:"3/7倍镜配置，中远距灵活。", tags:["倍镜"]},
+  {name:"M700", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JR6LEO092SAL51E9I4V4", title:"狙击精英流程", desc:"狙击精英任务流程专用方案。", tags:["狙击精英"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6IVHPMK05MUARGMS2VI79", title:"逃课近战", desc:"近战M14逃课打法，贴脸也能输出。", tags:["近战"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JR6F0G092SAL51E9I4V4", title:"低配连狙", desc:"低配连狙，性价比首选。", tags:["连狙","性价比"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"70万", code:"6HBQ3GK0AN3IA18KU684Q", title:"70万高端", desc:"70万高端配置，DMR拉满。", tags:["70万","高端"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6G2J5BC03V4MDAHLIB2IE", title:"丐版", desc:"低成本丐版连狙。", tags:["丐版"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6G81JT40CONGNP2MQHBSH", title:"红点", desc:"红点配置，近距连点。", tags:["红点"]},
+  {name:"M14", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6FUK9SC0AV5LMU856H3GK", title:"三倍镜", desc:"三倍镜配置，中距精准。", tags:["三倍镜"]},
+  {name:"R93", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JR6L8S092SAL51E9I4V4", title:"栓狙备选", desc:"R93栓狙备选方案。", tags:["栓狙"]},
+  {name:"PSG-1", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JR6MD0092SAL51E9I4V4", title:"PSG-1", desc:"PSG-1精确射手步枪方案。", tags:["精确射手"]},
+  {name:"SKS", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6IVGQVC05MUARGMS2VI79", title:"SKS", desc:"SKS射手步枪方案。", tags:["射手步枪"]},
+
+  // ===== 轻机枪 =====
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"", code:"6FEUAP40FFE99JTURSM3N", title:"性价比泼水", desc:"858射速泼水枪，556子弹便宜，续航压制。", tags:["858射速","泼水"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"26万", code:"6JP3LL00BNSV43TFRAQ1K", title:"S9 26万半改", desc:"S9赛季26万半改。", tags:["半改"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"44万", code:"6JP3L2C0BNSV43TFRAQ1K", title:"S9 44万满改", desc:"S9赛季44万满改。", tags:["满改"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"41万", code:"6JP3MC80BNSV43TFRAQ1K", title:"S9 41万链锯", desc:"链锯套件腰射流，右键不开镜但贴脸压制极强。", tags:["链锯套件","腰射流"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"36万", code:"6JR7V2C0BNSV43TFRAQ1K", title:"S9 哈夫克套件", desc:"944射速+特殊瞄准模式，配100发弹链，36万。", tags:["944射速","哈夫克套件"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"", code:"6JOEEH00AJJNE84NFNPLM", title:"S9 金枪客提交", desc:"金枪客任务提交用方案。", tags:["金枪客"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"23万", code:"6J68E8O0B0GKDDOTE9T6Q", title:"23万半改", desc:"23万半改，适合刷任务。", tags:["半改","刷任务"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"35万", code:"6J6ENRS0BAC7RIM3B0293", title:"35万长枪管稳定", desc:"长枪管远射程稳定方案。", tags:["长枪管","稳定"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"35万", code:"6J6EO5K0BAC7RIM3B0293", title:"35万短枪管操控", desc:"短枪管高机动方案。", tags:["短枪管","高机动"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"55万", code:"6I585CO080ELE0AQVMCG8", title:"S7 55万满腰射", desc:"100发弹鼓，射程40米，满腰射压制。", tags:["100发弹鼓","40米"]},
+  {name:"M249", type:"轻机枪", cat:"lmg", price:"12万", code:"6LEH8RK0223NGCLVVEN6F", title:"12万穷鬼流", desc:"穷鬼流神器，以小博大的机坝王，低成本高性价比。", tags:["12万","穷鬼流"]},
+
+  // ===== 手枪 =====
+  {name:"93R", type:"手枪", cat:"pistol", price:"8.6万", code:"6KAAR8G0FCDV4UPACJK76", title:"三连发偷人", desc:"三连发中距离偷人，8.6万。", tags:["三连发","中距离"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"6万", code:"6HPRRI40FKBO5SPC8HD5O", title:"跑刀推荐", desc:"跑刀推荐，可再捡两把裸枪带出，6万。", tags:["跑刀","6万"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"4.8万", code:"6HQ4CU80AO21USGQ8AC2S", title:"peek打头", desc:"peek打头流，4.8万最低成本。", tags:["peek","4.8万"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"", code:"6L73OO40A5GUHBBBKSMNC", title:"NGA S11自用", desc:"NGA玩家S11赛季自用方案。", tags:["S11"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"7.6万", code:"6K9V2MS0A021USGQ8AC2S", title:"全景红点", desc:"全景红点+远射枪管+制退器+24发弹匣，7.6万。", tags:["全景红点","24发"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"", code:"6J34RVC0BGEVCMNGNCGK1", title:"通用全距离", desc:"通用全距离代表方案。", tags:["通用"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"9万", code:"6LGGGD40DALNSIJVAM27C", title:"操控69", desc:"操控69、开镜224ms，9万。", tags:["操控69"]},
+  {name:"93R", type:"手枪", cat:"pistol", price:"30万", code:"6LGGGQ00DALNSIJVAM27C", title:"光速流", desc:"高移速绿爆闪光速流，30万。", tags:["光速流","高移速"]},
+
+  // ===== 霰弹枪 =====
+  {name:"FS-12", type:"霰弹枪", cat:"shotgun", price:"9.9万", code:"6KAB0CG0FCDV4UPACJK76", title:"副武器霰弹", desc:"唯一能放进副武器槽的霰弹枪，泵动模式头伤高，50米内peek摘头，四级独头弹两枪/四套一枪秒。", tags:["副武器","高头伤"]},
+];
+
+const CATS = [
+  {key:"all", label:"全部"},
+  {key:"rifle", label:"突击步枪"},
+  {key:"smg", label:"冲锋枪"},
+  {key:"sniper", label:"狙击/射手"},
+  {key:"lmg", label:"轻机枪"},
+  {key:"pistol", label:"手枪"},
+  {key:"shotgun", label:"霰弹枪"},
+];
+
+let state = { q:"", cat:"all" };
+const $ = s => document.querySelector(s);
+const list = $("#list"), count = $("#count"), toast = $("#toast");
+
+function renderCats(){
+  $("#cats").innerHTML = CATS.map(c =>
+    `<button class="chip ${state.cat===c.key?'active':''}" data-cat="${c.key}">${c.label}</button>`
+  ).join("");
+}
+function match(item){
+  if(state.cat!=='all' && item.cat!==state.cat) return false;
+  if(!state.q) return true;
+  const hay = [item.name,item.type,item.code,item.title,item.desc,...item.tags].join(" ").toLowerCase();
+  return state.q.split(/\s+/).every(k => hay.includes(k));
+}
+function render(){
+  const items = DATA.filter(match);
+  count.textContent = `共 ${items.length} 条`;
+  if(!items.length){
+    list.innerHTML = `<div class="empty">没有找到匹配的改枪码，换个关键词试试吧</div>`;
+    return;
+  }
+  list.innerHTML = items.map((it,i)=>`
+    <div class="card">
+      <div class="card-top">
+        <span class="tag ${it.cat}">${it.type}</span>
+        <span class="price ${it.price?'':'empty'}">${it.price || '价格未标注'}</span>
+      </div>
+      <h2 class="name">${it.name}<span class="title">${it.title}</span></h2>
+      <p class="desc">${it.desc}</p>
+      ${it.tags.length?`<div class="tags">${it.tags.map(t=>`<span>${t}</span>`).join("")}</div>`:''}
+      <div class="code-row">
+        <div class="code">${it.code}</div>
+        <button class="copy" data-i="${i}">复制</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function copy(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((res,rej)=>{
+    const ta=document.createElement("textarea");
+    ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); res(); }catch(e){ rej(e); }
+    document.body.removeChild(ta);
+  });
+}
+function showToast(msg){
+  toast.textContent=msg; toast.classList.add("show");
+  clearTimeout(showToast._t); showToast._t=setTimeout(()=>toast.classList.remove("show"),1500);
+}
+
+$("#q").addEventListener("input", e=>{ state.q=e.target.value.trim().toLowerCase(); render(); });
+$("#cats").addEventListener("click", e=>{
+  const btn=e.target.closest(".chip"); if(!btn) return;
+  state.cat=btn.dataset.cat; renderCats(); render();
+});
+list.addEventListener("click", e=>{
+  const btn=e.target.closest(".copy"); if(!btn) return;
+  const idx=+btn.dataset.i;
+  // 重新定位到当前渲染结果中对应的条目
+  const items=DATA.filter(match);
+  const item=items[idx];
+  if(!item) return;
+  copy(item.code).then(()=>{
+    btn.textContent="已复制"; btn.classList.add("copied");
+    showToast(`已复制 ${item.name} 改枪码`);
+    setTimeout(()=>{ btn.textContent="复制"; btn.classList.remove("copied"); },1500);
+  }).catch(()=>showToast("复制失败，请手动长按复制"));
+});
+
+renderCats();
+render();
+</script>
+</body>
+</html>
