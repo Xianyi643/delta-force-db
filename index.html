@@ -139,7 +139,7 @@
   <div class="list" id="list"></div>
 
   <footer>
-    <p>数据整理自网络公开攻略与玩家分享（NGA、17173、九游、游侠、B站、TapTap 等），约 65 套烽火地带改枪码，仅供参考。</p>
+    <p>数据整理自网络公开攻略与玩家分享（NGA、17173、九游、游侠、B站、TapTap 等），100+ 套烽火地带改枪码，仅供参考。</p>
     <p>部分方案未标注价格或仅标注赛季信息，请以游戏内实际为准。</p>
   </footer>
 </div>
@@ -164,6 +164,26 @@ const DATA = [
   {name:"MCX LT", type:"突击步枪", cat:"rifle", price:"", code:"6J0DQ0S092SAL51E9I4V4", title:"焰魂枪管版", desc:"近战爆发型，适合猛攻打法。", tags:["近战爆发"]},
   {name:"AKM", type:"突击步枪", cat:"rifle", price:"35万", code:"6JHK228035VPG7LB68O67", title:"35万稳定输出", desc:"47米有效距离，7.62口径稳定输出，中距强势。", tags:["47米","7.62"]},
 
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"35万", code:"6I57PBK080ELE0AQVMCG8", title:"35万半改", desc:"巨浪半改，射程27米，T0级近战特化，自带消音高射速。", tags:["27米","近战"]},
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"65万", code:"6I57O54080ELE0AQVMCG8", title:"65万满改", desc:"满改，射程35米，972射速拉满。", tags:["35米","满改"]},
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"", code:"6K88RS00BNSV43TFRAQ1K", title:"稳定版", desc:"斜握+天蝎+CT枪托，稳定性优先。", tags:["稳定"]},
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"", code:"6K88S9G0BNSV43TFRAQ1K", title:"高操控版", desc:"共二+天蝎+骨架，操控速度优先。", tags:["高操控"]},
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"", code:"6K88ST00BNSV43TFRAQ1K", title:"腰射版", desc:"EC前握把+QR后托，贴脸腰射爆发。", tags:["腰射"]},
+  {name:"AS VAL", type:"突击步枪", cat:"rifle", price:"", code:"6K0PGG804LN1E7RAN8V31", title:"均衡稳定流", desc:"新手首选，均衡稳定，好上手。", tags:["新手首选"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"", code:"6JQJDAK0BAC7RIM3B0293", title:"S9全能双流", desc:"FFC双流制退器+堤风长枪管+CT特种枪托+3倍镜，全场景T0。", tags:["T0","全场景"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"", code:"6JQJDMS0BAC7RIM3B0293", title:"S9消音隐身", desc:"专属消音器+2倍棱镜全息，老六偷袭流。", tags:["消音","老六"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"", code:"6H52M5K0FOTQMS6R8DC1B", title:"近战红点版", desc:"沙暴补偿器+红点1倍镜，贴脸冲楼。", tags:["近战","红点"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"42万", code:"6HRFIQ800USMS8ACK7UGI", title:"42万低配", desc:"不用长枪管的平民方案，42万。", tags:["低配"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"62万", code:"6HRFJ4C00USMS8ACK7UGI", title:"62万满改二倍", desc:"满改二倍镜，62万。", tags:["满改","二倍镜"]},
+  {name:"M7", type:"突击步枪", cat:"rifle", price:"100万", code:"6I57LC4080ELE0AQVMCG8", title:"S7超稳定", desc:"S7 T0超稳定满改，74米射程，100万。", tags:["74米","超稳定"]},
+  {name:"AUG", type:"突击步枪", cat:"rifle", price:"23万", code:"6KJ4VR80A021USGQ8AC2S", title:"23万远距离", desc:"80米轻松控枪，适合长弓点位、核电站外围拉扯。", tags:["80米","远距离"]},
+  {name:"AUG", type:"突击步枪", cat:"rifle", price:"", code:"6J0425008LNQRP6I06RFH", title:"性价比", desc:"AUG性价比方案。", tags:["性价比"]},
+  {name:"SG552", type:"突击步枪", cat:"rifle", price:"17万", code:"6KIU10S0A021USGQBAC2S", title:"17万高射速", desc:"906发/分射速第一，50米开镜扎实，近战腰射精度高。", tags:["906射速","17万"]},
+  {name:"SG552", type:"突击步枪", cat:"rifle", price:"", code:"6JG7RD008LNQRP6I06RFH", title:"性价比", desc:"SG552性价比方案。", tags:["性价比"]},
+  {name:"SCAR-H", type:"突击步枪", cat:"rifle", price:"27万", code:"6KITSJ40AO21USGQBAC2S", title:"27万中距", desc:"高基础伤害，开火抖动极低，40米定点对枪与架点消耗。", tags:["40米","架点"]},
+  {name:"MDR", type:"突击步枪", cat:"rifle", price:"", code:"6L6MOPG02JEKFSVPUH1ID", title:"低价方案", desc:"M7实用消音器+X25U斜握把+M7稳定后握把，金枪客低价。", tags:["消音","低价"]},
+  {name:"MDR", type:"突击步枪", cat:"rifle", price:"", code:"6L6VGA40BNSV43TFRAQ1K", title:"双水平方案", desc:"双水平后坐力控制方案。", tags:["双水平"]},
+
   // ===== 冲锋枪 =====
   {name:"Vector", type:"冲锋枪", cat:"smg", price:"24万", code:"6JH1A7K0C4PRBT1BGUG84", title:"24万修脚", desc:"21米近距离修脚流，低成本高爆发。", tags:["21米","修脚"]},
   {name:"Vector", type:"冲锋枪", cat:"smg", price:"52万", code:"6JG9VBO0C4PRBT1BGUG84", title:"52万满改", desc:"30米满改，射速与爆发拉满。", tags:["30米","满改"]},
@@ -179,6 +199,19 @@ const DATA = [
   {name:"MK4", type:"冲锋枪", cat:"smg", price:"", code:"6I5E80008R4RKTJI3FOBI", title:"昊天推荐(S8)", desc:"S8赛季主播昊天推荐方案。", tags:["S8","主播推荐"]},
   {name:"MK4", type:"冲锋枪", cat:"smg", price:"28万", code:"6I5M0HS04QRQQL6OOBF6G", title:"半改丐版", desc:"28万以内半改丐版，低成本体验全自动。", tags:["半改","丐版"]},
   {name:"MK4", type:"冲锋枪", cat:"smg", price:"", code:"6L73KE00A5GUHBBBKSMNC", title:"NGA S11自用", desc:"NGA玩家S11赛季自用方案。", tags:["S11"]},
+
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6L6KU5S09E401TH3AN462", title:"S11长管高配", desc:"门徒研究所S11方案，长管高配。", tags:["S11","长管"]},
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6L6KU6C09E401TH3AN462", title:"S11长管顶配", desc:"长管顶配方案。", tags:["顶配"]},
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6L6KU6K09E401TH3AN462", title:"一体管纯腰射", desc:"一体管纯腰射，贴脸爆发。", tags:["腰射"]},
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6L905SG09E401TH3AN462", title:"无管平价双修", desc:"无枪管平价双修方案。", tags:["双修","平价"]},
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6LD47HC00SA45GUN5P04O", title:"中距离改装", desc:"中距离改装，胸腹同伤0.3秒瞬杀五套。", tags:["中距离","0.3秒"]},
+  {name:"汤姆逊", type:"冲锋枪", cat:"smg", price:"", code:"6LBROPC09OAKT4EKLBRAH", title:"双修", desc:"开镜腰射双修方案。", tags:["双修"]},
+  {name:"P90", type:"冲锋枪", cat:"smg", price:"", code:"6GQTMSS095HC4609S9G3Q", title:"烽火地带", desc:"P90烽火地带方案。", tags:["P90"]},
+  {name:"P90", type:"冲锋枪", cat:"smg", price:"", code:"6JC8FM0004T7192SL47BJ", title:"近战", desc:"近战爆发方案。", tags:["近战"]},
+  {name:"P90", type:"冲锋枪", cat:"smg", price:"", code:"6JC8ISC004T7192SL47BJ", title:"蛛网腰射", desc:"蛛网腰射方案。", tags:["腰射"]},
+  {name:"P90", type:"冲锋枪", cat:"smg", price:"", code:"6I8JCQG0E3VRER5I2CCA5", title:"修脚", desc:"修脚打法方案。", tags:["修脚"]},
+  {name:"MP5", type:"冲锋枪", cat:"smg", price:"", code:"6H91EEG08MRI19EV1VB6H", title:"烽火地带", desc:"MP5烽火地带方案。", tags:["MP5"]},
+  {name:"MP5", type:"冲锋枪", cat:"smg", price:"", code:"6JC8BS0004T7192SL47BJ", title:"20m腰射爆发", desc:"20米内腰射爆发。", tags:["腰射","20米"]},
 
   // ===== 狙击/射手步枪 =====
   {name:"SVD", type:"狙击/射手步枪", cat:"sniper", price:"28万", code:"6IVDVP405MEBDRSRO17QC", title:"28万狙击精英", desc:"S8狙击精英任务推荐，28万实用方案。", tags:["狙击精英","28万"]},
@@ -199,6 +232,12 @@ const DATA = [
   {name:"PSG-1", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JR6MD0092SAL51E9I4V4", title:"PSG-1", desc:"PSG-1精确射手步枪方案。", tags:["精确射手"]},
   {name:"SKS", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6IVGQVC05MUARGMS2VI79", title:"SKS", desc:"SKS射手步枪方案。", tags:["射手步枪"]},
 
+  {name:"AWM", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6FFJOBS0FFE99JTURSM3N", title:"基础推荐", desc:"天际线长枪管+旋涡消炎器+穹顶套件，基础实用。", tags:["基础"]},
+  {name:"AWM", type:"狙击/射手步枪", cat:"sniper", price:"63万", code:"6GCOMIO03HDN3EE1QTI4I", title:"林树推荐", desc:"据枪稳定性高、操控快，约63万，绝密推荐。", tags:["63万","据枪稳定"]},
+  {name:"AWM", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6HEPHCS0C984FS5RCL5R8", title:"冲锋狙", desc:"主打操控速度，冲锋狙。", tags:["操控速度"]},
+  {name:"AWM", type:"狙击/射手步枪", cat:"sniper", price:"", code:"6JPHC500AO21USGQ8AC2S", title:"S9最优", desc:"S9赛季最优，操控与据枪稳定兼顾。", tags:["S9","最优"]},
+  {name:"AWM", type:"狙击/射手步枪", cat:"sniper", price:"115万", code:"6K1AI6C0AI4S65CVSS3J1", title:"115W终极版", desc:"高投入，中远距离终极方案。", tags:["115万","终极"]},
+
   // ===== 轻机枪 =====
   {name:"M249", type:"轻机枪", cat:"lmg", price:"", code:"6FEUAP40FFE99JTURSM3N", title:"性价比泼水", desc:"858射速泼水枪，556子弹便宜，续航压制。", tags:["858射速","泼水"]},
   {name:"M249", type:"轻机枪", cat:"lmg", price:"26万", code:"6JP3LL00BNSV43TFRAQ1K", title:"S9 26万半改", desc:"S9赛季26万半改。", tags:["半改"]},
@@ -211,6 +250,10 @@ const DATA = [
   {name:"M249", type:"轻机枪", cat:"lmg", price:"35万", code:"6J6EO5K0BAC7RIM3B0293", title:"35万短枪管操控", desc:"短枪管高机动方案。", tags:["短枪管","高机动"]},
   {name:"M249", type:"轻机枪", cat:"lmg", price:"55万", code:"6I585CO080ELE0AQVMCG8", title:"S7 55万满腰射", desc:"100发弹鼓，射程40米，满腰射压制。", tags:["100发弹鼓","40米"]},
   {name:"M249", type:"轻机枪", cat:"lmg", price:"12万", code:"6LEH8RK0223NGCLVVEN6F", title:"12万穷鬼流", desc:"穷鬼流神器，以小博大的机坝王，低成本高性价比。", tags:["12万","穷鬼流"]},
+
+  {name:"QJB201", type:"轻机枪", cat:"lmg", price:"", code:"6L6V8N80BNSV43TFRAQ1K", title:"金枪客交付", desc:"金枪客任务交付码，后坐力控制≥75、操控≥70。", tags:["金枪客","任务"]},
+  {name:"QJB201", type:"轻机枪", cat:"lmg", price:"", code:"6L6MNJ402JEKFSVPUH1ID", title:"低价方案", desc:"钢膛枪口+共振二代前握把+60发弹鼓，低价交付。", tags:["低价","60发"]},
+  {name:"QJB201", type:"轻机枪", cat:"lmg", price:"", code:"6L6IFCO05MUARGMS2VI79", title:"实战方案", desc:"QJB201实战优化方案。", tags:["实战"]},
 
   // ===== 手枪 =====
   {name:"93R", type:"手枪", cat:"pistol", price:"8.6万", code:"6KAAR8G0FCDV4UPACJK76", title:"三连发偷人", desc:"三连发中距离偷人，8.6万。", tags:["三连发","中距离"]},
